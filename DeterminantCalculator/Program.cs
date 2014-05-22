@@ -39,14 +39,14 @@ namespace DeterminantCalculator
             {
                 // sigma permütasyonları ile çarpımların çarpımının toplamı
                 int[] SigmaPerm = Sigma[i];
-                double SigmaSign = Signum(SigmaPerm);
+                double SigmaSign = LeviCivitaSymbol(SigmaPerm);
                 double SigmaSum = SigmaSign;
 
                 //debug
-                Console.Write(SigmaSign + " ");
-                foreach (var item in SigmaPerm)
-                    Console.Write((item+1) + " ");
-                Console.WriteLine();
+                //Console.Write(SigmaSign + " ");
+                //foreach (var item in SigmaPerm)
+                //    Console.Write((item+1) + " ");
+                //Console.WriteLine();
 
                 for (int j = 0; j < SigmaPerm.Length; j++)
                 {
@@ -61,21 +61,14 @@ namespace DeterminantCalculator
             Console.ReadLine();
         }
 
-        private static double Signum(int[] SigmaPerm)
+        private static double LeviCivitaSymbol(int[] SigmaPerm)
         {
-            int sgn = 0;
-            for (int i = 0; i < SigmaPerm.Length; i++)
-            {
-                if (SigmaPerm[i] == i)
-                    sgn++;
-            }
-            sgn = SigmaPerm.Length - sgn;
-            if (sgn == 0)
-                return 1.0;
-            else if (sgn % 2 == 0)
-                return -1.0;
-            else
-                return 1.0;
+            // Levi-Civita sembolü
+            int sign = 1;
+            for (int i = 1; i < SigmaPerm.Length; i++)
+                for (int j = 0; j < i; j++)
+                    sign *= Math.Sign(SigmaPerm[i] - SigmaPerm[j]);
+            return (sign > 0) ? (1.0) : (-1.0);
         }
 
         static List<int[]> VectorPermutations(int[] vector)
