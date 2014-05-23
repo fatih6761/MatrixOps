@@ -42,12 +42,6 @@ namespace DeterminantCalculator
                 double SigmaSign = LeviCivitaSymbol(SigmaPerm);
                 double SigmaSum = SigmaSign;
 
-                //debug
-                //Console.Write(SigmaSign + " ");
-                //foreach (var item in SigmaPerm)
-                //    Console.Write((item+1) + " ");
-                //Console.WriteLine();
-
                 for (int j = 0; j < SigmaPerm.Length; j++)
                 {
                     SigmaSum *= matrix[SigmaPerm[j]][j];
